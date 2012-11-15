@@ -1,0 +1,20 @@
+parameters:
+  elseym.controller.shelf.class: elseym\ShelfBundle\Controller\ShelfController
+  elseym.controller.book.class: elseym\ShelfBundle\Controller\BookController
+
+services:
+  elseym.controller.shelf:
+    class:  %elseym.controller.shelf.class%
+    arguments:
+      - @elseym.agathe
+      - @templating
+      - @doctrine.orm.entity_manager
+
+  elseym.controller.book:
+    class:  %elseym.controller.book.class%
+    arguments:
+      - @elseym.agathe
+      - @templating
+      - @doctrine.orm.entity_manager
+      - @form.factory
+      - @router

@@ -1,0 +1,30 @@
+book:
+    pattern:  /
+    defaults: { _controller: elseym.controller.book:indexAction }
+
+book_show:
+    pattern:  /{slug}/show
+    defaults: { _controller: elseym.controller.book:showAction }
+
+book_new:
+    pattern:  /new
+    defaults: { _controller: elseym.controller.book:newAction }
+
+book_create:
+    pattern:  /create
+    defaults: { _controller: elseym.controller.book:createAction }
+    requirements: { _method: post }
+
+book_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: elseym.controller.book:editAction }
+
+book_update:
+    pattern:  /{id}/update
+    defaults: { _controller: elseym.controller.book:updateAction }
+    requirements: { _method: post }
+
+book_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: elseym.controller.book:deleteAction }
+    requirements: { _method: post }

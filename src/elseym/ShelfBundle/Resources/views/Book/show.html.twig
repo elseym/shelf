@@ -1,0 +1,17 @@
+<h3>{{ entity.title }}</h3>
+
+<div class="bookinfo">
+    <p><b>Id:</b>{{ entity.id }}</p>
+    <p><b>Title:</b>{{ entity.title }}</p>
+    <p><b>Author:</b>{{ entity.author }}</p>
+    <p><b>Year:</b>{{ entity.year }}</p>
+</div>
+
+<form id="delete-book-{{ entity.slug }}-form" action="{{ path('book_delete', { 'id': entity.id }) }}" method="post">
+    {{ form_widget(delete_form) }}
+</form>
+
+<div class="controls">
+    <button data-targetform="delete-book-{{ entity.slug }}-form" class="btn btn-danger">delete book</button>
+    <button class="btn btn-primary" data-dismiss="modal">close</button>
+</div>

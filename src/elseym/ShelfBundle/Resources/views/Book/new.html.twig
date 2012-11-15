@@ -1,0 +1,10 @@
+<h3>add a book</h3>
+
+<form id="new-book-form" action="{{ path('book_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form, {'attr': {'class': 'form-inline'}}) }}
+</form>
+
+<div class="controls">
+    <button class="btn" data-dismiss="modal">close</button>
+    <button data-targetform="new-book-form" class="btn btn-primary">create book</button>
+</div>

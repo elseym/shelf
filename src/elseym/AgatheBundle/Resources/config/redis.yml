@@ -1,0 +1,6 @@
+snc_redis:
+  clients:
+    agathe:
+      type: predis
+      alias: agathe
+      dsn: redis://localhost/15

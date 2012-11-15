@@ -1,0 +1,68 @@
+body {
+    background: #444;
+}
+
+div.container {
+    padding: 120px 10px;
+    max-width: 1024px;
+}
+
+section#shelf {
+    background: url(../img/shelf.png) no-repeat scroll 50% 10px;
+    padding: 19px;
+    min-height: 320px;
+}
+
+section#shelf nav {
+    height: 40px;
+    margin: -19px -19px 19px -19px;
+}
+
+section#shelf a {
+    outline: none;
+    color: #000;
+}
+
+section#shelf article.book {
+    height: 110px;
+    width: 85px;
+    overflow: hidden;
+    margin: 0 18px 19px 19px;
+    display: block;
+    padding: 4px 2px 4px 12px;
+    float: left;
+    background: url(../img/book.png);
+    border: 2px solid #555;
+}
+
+section#shelf article.book span {
+    letter-spacing: 1px;
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+}
+
+section#shelf article.book span.author {
+    font: 10px/12px "Helvetica Neue";
+}
+
+section#shelf article.book span.title {
+    font: 900 12px/14px "Helvetica Neue";
+}
+
+.modal {
+    /*width: 320px;*/
+}
+
+.modal .modal-footer form {
+    display: inline;
+}
+
+.modal div.bookinfo p b,
+.modal form label {
+    display: inline-block;
+    width: 50px;
+    text-align: right;
+    font-weight: bold;
+    margin: 0 10px;
+}

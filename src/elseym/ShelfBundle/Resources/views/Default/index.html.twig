@@ -1,0 +1,42 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    The Shelf.
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <section id="shelf" class="well">
+            <nav class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand" href="#">the shelf</a>
+                    <ul class="nav">
+                        <li><a href="#" id="nav-addbook"><i class="icon-plus-sign"></i> add a book</a></li>
+                    </ul>
+                </div>
+            </nav>
+            {% for book in books %}
+                <a href="#">
+                    <article class="book well" id="{{ book.slug }}">
+                        <span class="author">{{ book.author }}</span>
+                        <span class="title">{{ book.title }}</span>
+                    </article>
+                </a>
+            {% endfor %}
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://shelf.dev:8081/socket.io/socket.io.js"></script>
+    <script data-main="/bundles/elseymshelf/js/main" src="/bundles/elseymshelf/js/require-jquery.js"></script>
+    <script src="/bundles/elseymshelf/js/bootstrap.min.js"></script>
+    <script src="/bundles/elseymshelf/js/jquery-ui.min.js"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/bundles/elseymshelf/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bundles/elseymshelf/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/bundles/elseymshelf/css/style.css">
+{% endblock %}

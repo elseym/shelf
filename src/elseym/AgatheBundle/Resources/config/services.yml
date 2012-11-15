@@ -1,0 +1,9 @@
+parameters:
+  elseym.agathe.class: elseym\AgatheBundle\Agathe
+
+services:
+  elseym.agathe:
+    class: %elseym.agathe.class%
+    arguments:
+      - @snc_redis.agathe
+      - @session

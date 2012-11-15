@@ -1,0 +1,8 @@
+elseym_shelf_homepage:
+  pattern:  /
+#  defaults: { _controller: elseymShelfBundle:Shelf:index }
+  defaults: { _controller: elseym.controller.shelf:indexAction }
+
+elseymShelfBundle_book:
+  resource: "@elseymShelfBundle/Resources/config/routing/book.yml"
+  prefix:   /book
