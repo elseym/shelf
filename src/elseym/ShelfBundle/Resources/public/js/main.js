@@ -18,7 +18,6 @@
 require(['jquery', 'modal', 'agathe'],
 function( $,        modal,   ä) {
 
-
     $('#nav-addbook')
         .on("click", function() {
             modal.show("/app_dev.php/book/new");
