@@ -1,5 +1,7 @@
 parameters:
   elseym.agathe.class: elseym\AgatheBundle\Agathe
+  elseym.agathe.granting_access_manager.class: elseym\AgatheBundle\Authorization\GrantingAccessManager
+  elseym.agathe.setup_listener.class: elseym\AgatheBundle\EventListener\SetupListener
 
 services:
   elseym.agathe:
@@ -7,3 +9,15 @@ services:
     arguments:
       - @snc_redis.agathe
       - @session
+
+  elseym.agathe.granting_access_manager:
+    class: %elseym.agathe.granting_access_manager.class%
+
+  elseym.agathe.setup_listener:
+    class: %elseym.agathe.setup_listener.class%
+    arguments:
+      - @elseym.agathe
+      - @session
+      - @security.context
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onRequest }

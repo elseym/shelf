@@ -4,6 +4,8 @@ namespace elseym\AgatheBundle;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Predis\Client as PredisClient;
+use elseym\AgatheBundle\Authorization\AccessManagerInterface;
+use \Symfony\Component\Security\Core\User\UserInterface;
 
 class Agathe
 {
@@ -16,10 +18,14 @@ class Agathe
 
     private $redis;
     private $session;
+    private $accessManager;
+    private $resources;
 
-    public function __construct(PredisClient $redis, SessionInterface $session) {
+    public function __construct(PredisClient $redis, SessionInterface $session, AccessManagerInterface $accessManager, array $resources) {
         $this->redis = $redis;
         $this->session = $session;
+        $this->accessManager = $accessManager;
+        $this->resources = $resources;
     }
 
     public function resourceCreated(AgatheResourceInterface $resource, $withPayload = true) {
@@ -86,6 +92,34 @@ class Agathe
 
     public function getSession() {
         return $this->session;
+    }
+
+    public function registerNewUser(UserInterface $user = null) {
+        $r = $this->getRedis();
+
+        $r->multi();
+
+        $sid = $this->session->getId();
+        foreach ($this->resources as $resource) {
+            if (!$this->accessManager->userHasAccessTo($user, $resource)) continue;
+
+            $r->sadd($sid, $resource);
+            $r->sadd("ns:" . $this->uriToKey($resource), $sid);
+        }
+
+        $expiresIn = max($this->getSession()->getMetadataBag()->getLifetime(), self::EXPIRES_MINIMUM);
+        $r->expire($sid, $expiresIn);
+        $r->publish("e:ctrl:client:new", $sid);
+
+        $redisResult = $r->exec();
+
+        // wait max. 5sec for node/socket to register namespaces
+        $ts = time() + 5;
+        do {
+            $error = (time() >= $ts || usleep(2e4));
+        } while (!$error && $r->scard($sid) > 0);
+
+        return !$error;
     }
 
     /**

@@ -43,3 +43,9 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
+
+elseym_agathe:
+  resources:
+    - "book"
+    - "magazine"
+  access_manager: "elseym.agathe.granting_access_manager"
