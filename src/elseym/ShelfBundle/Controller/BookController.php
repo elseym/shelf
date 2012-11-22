@@ -5,6 +5,7 @@ namespace elseym\ShelfBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use \Symfony\Component\HttpFoundation\Response;
 
 use elseym\ShelfBundle\Entity\Book;
 use elseym\ShelfBundle\Form\BookType;
@@ -51,6 +52,12 @@ class BookController
         ));
     }
 
+    public function indexActionJson() {
+        $entities = $this->em->getRepository('elseymShelfBundle:Book')->findAll();
+
+        return new Response(json_encode($entities));
+    }
+
     /**
      * Finds and displays a Book entity.
      *
@@ -63,13 +70,18 @@ class BookController
             throw new NotFoundHttpException('Unable to find Book entity.');
         }
 
-        $this->agathe->resourceRequested($entity);
+        $this->agathe->resourceRequested($entity, true);
 
         $deleteForm = $this->createDeleteForm($entity->getId());
 
         return $this->templating->renderResponse('elseymShelfBundle:Book:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
+    }
+
+    public function showActionJson($slug) {
+        $entity = $this->em->getRepository('elseymShelfBundle:Book')->findOneBySlug($slug);
+        return new Response(json_encode($entity->getPayload()));
     }
 
     /**
@@ -101,7 +113,7 @@ class BookController
             $this->em->persist($entity);
             $this->em->flush();
 
-            $this->agathe->resourceCreated($entity);
+            $this->agathe->resourceCreated($entity, true);
 
             return new RedirectResponse($this->router->generate('book_show', array('slug' => $entity->getSlug())), 302);
         }
@@ -154,7 +166,7 @@ class BookController
             $this->em->persist($entity);
             $this->em->flush();
 
-            $this->agathe->resourceModified($entity);
+            $this->agathe->resourceModified($entity, true);
             return new RedirectResponse($this->router->generate('book_edit', array('id' => $id)));
         }
 
@@ -184,7 +196,7 @@ class BookController
             $this->em->remove($entity);
             $this->em->flush();
 
-            $this->agathe->resourceDeleted($entity);
+            $this->agathe->resourceDeleted($entity, true);
         }
 
         return new RedirectResponse($this->router->generate('book'));

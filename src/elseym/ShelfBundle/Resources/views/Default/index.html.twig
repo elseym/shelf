@@ -12,17 +12,21 @@
                     <a class="brand" href="#">the shelf</a>
                     <ul class="nav">
                         <li><a href="#" id="nav-addbook"><i class="icon-plus-sign"></i> add a book</a></li>
+                        <li><a href="#" id="rereg"><i class="icon-refresh"></i> re-register client</a></li>
                     </ul>
                 </div>
             </nav>
+            <section class="clearfix" id="books">
             {% for book in books %}
-                <a href="#">
-                    <article class="book well" id="{{ book.slug }}">
-                        <span class="author">{{ book.author }}</span>
-                        <span class="title">{{ book.title }}</span>
-                    </article>
-                </a>
+                <article class="book well" id="{{ book.slug }}">
+                    <span class="author">{{ book.author }}</span>
+                    <span class="title">{{ book.title }}</span>
+                </article>
             {% endfor %}
+            </section>
+            <footer class="clearfix" id="realtime-feed">
+                <i class="icon-white icon-info-sign"></i>
+            </footer>
         </section>
     </div>
 

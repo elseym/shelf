@@ -10,7 +10,6 @@ div.container {
 section#shelf {
     background: url(../img/shelf.png) no-repeat scroll 50% 10px;
     padding: 19px;
-    min-height: 320px;
 }
 
 section#shelf nav {
@@ -27,12 +26,13 @@ section#shelf article.book {
     height: 110px;
     width: 85px;
     overflow: hidden;
-    margin: 0 18px 19px 19px;
+    margin: 0 16px 19px 17px;
     display: block;
     padding: 4px 2px 4px 12px;
     float: left;
     background: url(../img/book.png);
     border: 2px solid #555;
+    cursor: pointer;
 }
 
 section#shelf article.book span {
@@ -50,6 +50,55 @@ section#shelf article.book span.title {
     font: 900 12px/14px "Helvetica Neue";
 }
 
+section#books {
+    text-align: center;
+}
+
+footer#realtime-feed {
+    padding: 4px 15px 0 15px;
+    background-color: #999;
+    background-image: -moz-linear-gradient(top,#999,#BBB);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#999),to(#BBB));
+    background-image: -webkit-linear-gradient(top,#999,#BBB);
+    background-image: -o-linear-gradient(top,#999,#BBB);
+    background-image: linear-gradient(to bottom,#999,#BBB);
+    background-repeat: repeat-x;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin: 10px -19px -19px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: 24px;
+    white-space: nowrap;
+}
+
+footer#realtime-feed span.rtf-item {
+    display: inline-block;
+    margin: 0 10px;
+    color: #eee;
+    font-weight: 100;
+}
+
+footer#realtime-feed span.rtf-item:before {
+    content: "[info]";
+    font-size: .7em;
+    color: #333;
+    padding: 0 4px 0 0;
+}
+
+footer#realtime-feed span.rtf-item + span.rtf-item {
+    color: #ddd;
+}
+
+footer#realtime-feed span.rtf-item + span.rtf-item + span.rtf-item {
+    color: #ccc;
+}
+
+footer#realtime-feed span.rtf-item + span.rtf-item + span.rtf-item + span.rtf-item {
+    color: #bbb;
+}
+
 .modal {
     /*width: 320px;*/
 }
@@ -65,4 +114,10 @@ section#shelf article.book span.title {
     text-align: right;
     font-weight: bold;
     margin: 0 10px;
+}
+
+@media (max-width: 767px) {
+    .modal.fade.in {
+        top: 50%;
+    }
 }

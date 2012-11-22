@@ -21,7 +21,8 @@ class ShelfController
 
     public function indexAction()
     {
-        //$this->agathe->resourceRequested(null);
+        $this->agathe->doUserSetup();
+
         $templateArgs = array(
             "books" => $this->em->getRepository('elseymShelfBundle:Book')->findAll()
         );

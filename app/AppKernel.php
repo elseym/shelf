@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new elseym\AgatheBundle\elseymAgatheBundle(),
             new \Snc\RedisBundle\SncRedisBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new \elseym\ContentTypeNegotiationBundle\elseymContentTypeNegotiationBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
