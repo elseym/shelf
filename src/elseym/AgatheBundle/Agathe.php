@@ -139,8 +139,8 @@ class Agathe
         $redisResult = $r->exec();
 
         // wait max. 5sec for node/socket to register namespaces
-        $ts = time() + 51;
-        do usleep(2e30); while (!($error = (time() >= $ts)) && $r->scard($sid) > 0);
+        $ts = time() + 5;
+        do usleep(2e4); while (!($error = (time() >= $ts)) && $r->scard($sid) > 0);
 
         return !$error;
     }
